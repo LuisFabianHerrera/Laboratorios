@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login USB - Universidad Salesiana de Bolivia</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-card">
+        <!-- Header -->
+        <div class="usb-decoration"></div>
+        <div class="login-header">
+            <div class="usb-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 12.18L4.36 11 12 6.82 19.64 11 12 15.18zM5 14.5v4L12 22l7-3.5v-4L12 18l-7-3.5z"/>
+                </svg>
+            </div>
+            <h2>Universidad Salesiana de Bolivia</h2>
+        </div>
+        
+        <!-- Body -->
+        <div class="login-body">
+            <h3 class="text-center mb-4" style="color: var(--usb-blue);">
+                <i class="fas fa-user-circle me-2"></i>Iniciar Sesión
+            </h3>
+            
+            <form id="loginForm">
+                <!-- Usuario -->
+                <div class="mb-3">
+                    <label for="usuario" class="form-label">
+                        <i class="fas fa-envelope me-2" style="color: var(--usb-blue);"></i>Usuario / Email
+                    </label>
+                    <div class="input-group">
+                        <input type="text" 
+                               class="form-control" 
+                               id="usuario" 
+                               name="usuario" 
+                               placeholder="Ingrese su usuario" 
+                               required>
+                        <span class="input-group-text">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Contraseña -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">
+                        <i class="fas fa-lock me-2" style="color: var(--usb-blue);"></i>Contraseña
+                    </label>
+                    <div class="input-group">
+                        <input type="password" 
+                               class="form-control" 
+                               id="password" 
+                               name="password" 
+                               placeholder="Ingrese su contraseña" 
+                               required>
+                        <span class="input-group-text" id="togglePassword">
+                            <i class="fas fa-eye-slash"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Recordar -->
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="recordar">
+                    <label class="form-check-label" for="recordar">Recordar usuario</label>
+                </div>
+                
+                <!-- Botón -->
+                <button type="submit" class="btn btn-login">
+                    <i class="fas fa-sign-in-alt me-2"></i>Ingresar
+                </button>
+            </form>
+            
+            <!-- Mensaje -->
+            <div id="mensaje"></div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="login-footer">
+            <p>&copy; 2024 Universidad Salesiana de Bolivia. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+$(document).ready(function(){
+
+    // Toggle password visibility
+    $('#togglePassword').click(function(){
+        var input = $(this).prev('input');
+        var icon = $(this).find('i');
+        
+        if(input.attr('type') === 'password'){
+            input.attr('type', 'text');
+            icon.removeClass('fa-eye-slash').addClass('fa-eye');
+        } else {
+            input.attr('type', 'password');
+            icon.removeClass('fa-eye').addClass('fa-eye-slash');
+        }
+    });
+
+    // Form submit
+    $("#loginForm").submit(function(e){
+        e.preventDefault();
+
+        var usuario = $("#usuario").val();
+        var password = $("#password").val();
+
+        // Credenciales
+        var usuario_correcto = "LuisBenjaminFabianHerrera@gmail.com";
+        var password_correcto = "123456";
+
+        if(usuario === usuario_correcto && password === password_correcto){
+            $("#mensaje").html("<div class='alert alert-success'><i class='fas fa-check-circle me-2'></i>✅ Login correcto. Redirigiendo...</div>");
+            
+            setTimeout(function(){
+                window.location.href = "bienvenido.html";
+            },1500);
+
+        } else {
+            $("#mensaje").html("<div class='alert alert-danger'><i class='fas fa-exclamation-circle me-2'></i>❌ Usuario o contraseña incorrectos</div>");
+        }
+
+    });
+
+});
+</script>
+
+</body>
+</html>
